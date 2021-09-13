@@ -13,18 +13,25 @@ import { NotImplementedError } from '../extensions/index.js';
  */
 export default function getSeason(date) {
   if (!date) return 'Unable to determine the time of year!';
-  if (!(date instanceof Date) || Object.keys(date).length) throw new Error('Invalid date!');
+
+  try {
+    date.getTime();
+  }
+  catch (error) {
+    throw new Error('Invalid date!');
+  }
+
 
   let month = date.getMonth();
 
   switch (true) {
     case month === 0 || month === 11 || month === 1:
       return 'winter';
-    case month >= 2 || month <= 4:
+    case month >= 2 && month <= 4:
       return 'spring';
-    case month >= 5 || month <= 7:
+    case month >= 5 && month <= 7:
       return 'summer';
-    case month >= 8 || month <= 10:
+    case month >= 8 && month <= 10:
       return 'autumn';
   }
 }
