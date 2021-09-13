@@ -19,5 +19,5 @@ export default function createDreamTeam(members) {
 
   members.forEach(name => typeof name === 'string' ? teamNickName.push(name.toUpperCase().trim().charAt(0)) : 0);
 
-  return teamNickName.sort((a, b) => a + b).join('');
+  return teamNickName.sort((a, b) => a.localeCompare(b)).join('');
 }
